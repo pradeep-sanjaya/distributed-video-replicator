@@ -1,4 +1,4 @@
-### Video replicator ###
+### Distributed Video Replicator ###
 - This program will create a master-server cluster in the environment.
 - All new nodes will be connected to the cluster.
 - A new master will be elected if the current master node is terminated or killed.
@@ -30,4 +30,20 @@ curl -i -u guest:guest -H "content-type:application/json" \
   "payload":"https://<bucket>.s3.amazonaws.com/<file.m3u8>",
   "payload_encoding":"string"
 }' http://localhost:15672/api/exchanges/%2f/amq.default/publish
+```
+
+### Set AWS Credentials ###
+```shell
+vi ~/.aws/credentials
+[default]
+aws_access_key_id=xxx
+aws_secret_access_key=xxx
+```
+
+### Run ###
+```shell
+mvn clean package
+
+## Run multiple nodes
+java -jar target/distributed-video-replicator-1.0-SNAPSHOT.jar
 ```
